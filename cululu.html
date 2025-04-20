@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MORPHOSIS - Evolución en Productos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #3a7bd5;
+            --secondary-color: #00d2ff;
+            --dark-color: #333;
+            --light-color: #f4f8fb;
+            --accent-color: #ff7e5f;
+            --gradient-start: #190033;
+            --gradient-end: #6b24d6;
+        }
+        
+        body {
+            font-family: 'Engravers Gothic CE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'Organetto Ultra Bold Ext', 'Arial Black', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .tagline {
+            font-style: italic;
+            font-weight: 300;
+            font-family: 'Engravers Gothic CE', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        nav {
+            background-color: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+        }
+        
+        nav li {
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h1, h2, h3 {
+            color: white;
+            font-family: 'Organetto Ultra Bold Ext', 'Arial Black', sans-serif;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        
+        .hero {
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Engravers Gothic CE', sans-serif;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem 0;
+            font-family: 'Organetto Ultra Bold Ext', 'Arial Black', sans-serif;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 0.5rem 0;
+        }
+        
+        .tracking-container {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tracking-form {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .tracking-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .tracking-form input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .tracking-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-family: 'Engravers Gothic CE', sans-serif;
+            text-transform: uppercase;
+        }
+                
+        .tracking-result {
+            display: none;
+        }
+        
+        .tracking-result.active {
+            display: block;
+        }
+
+        .tracking-id-section {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .tracking-id-title {
+            margin: 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tracking-id {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0.5rem 0 0 0;
+            letter-spacing: 1px;
+            color: white;
+            font-family: 'Organetto Ultra Bold Ext', sans-serif;
+        }
+        
+        .tracking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .tracking-steps::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .step.active .step-icon {
+            background: var(--secondary-color);
+        }
+        
+        .step-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .step.active .step-label {
+            color: white;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .payment-method {
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--secondary-color);
+            background-color: rgba(255,255,255,0.15);
+        }
+        
+        .payment-method.active {
+            border-color: var(--secondary-color);
+            background-color: rgba(0, 210, 255, 0.1);
+        }
+        
+        .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .payment-form {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-info {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .payment-info p {
+            margin: 0.5rem 0;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .payment-security {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .payment-security span {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+            font-family: 'Engravers Gothic CE', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .payment-type {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .file-upload {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+            border: 2px dashed rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--secondary-color);
+            background-color: rgba(0,0,0,0.3);
+        }
+        
+        .file-upload p {
+            margin: 0.5rem 0;
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .phone-info {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .tracking-steps {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .tracking-steps::before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MORPHOSIS</div>
+        <p class="tagline">Evolucionando tu experiencia de compra</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#seguimiento">Seguimiento</a></li>
+            <li><a href="#pagos">Pagos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="inicio" class="container">
+            <div class="hero">
+                <h1>Bienvenido a MORPHOSIS</h1>
+                <p>Tu destino para productos innovadores que evolucionan con tus necesidades.</p>
+                <a href="#productos" class="btn">Ver Productos</a>
+            </div>
+        </section>
+        
+        <section id="productos" class="container">
+            <h2>Nuestros Productos</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/300/200" alt="Producto 1">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Producto Evolucionado 1</h3>
+                        <p>Una descripción detallada del producto y sus características únicas.</p>
+                        <div class="product-price">$99.99</div>
+                        <button class="btn">Comprar ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/300/200" alt="Producto 2">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Producto Evolucionado 2</h3>
+                        <p>Una descripción detallada del producto y sus características únicas.</p>
+                        <div class="product-price">$149.99</div>
+                        <button class="btn">Comprar ahora</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/300/200" alt="Producto 3">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Producto Evolucionado 3</h3>
+                        <p>Una descripción detallada del producto y sus características únicas.</p>
+                        <div class="product-price">$79.99</div>
+                        <button class="btn">Comprar ahora</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="seguimiento" class="container">
+            <h2>Seguimiento de Pedidos</h2>
+            
+            <div class="tracking-container">
+                <p>Ingrese su número de pedido para ver el estado de su entrega:</p>
+                
+                <div class="tracking-form">
+                    <input type="text" placeholder="Número de seguimiento / tracking" id="tracking-number">
+                    <button onclick="checkTracking()">Buscar</button>
+                </div>
+                
+                <div class="tracking-result" id="tracking-result">
+                    <div class="tracking-id-section">
+                        <div class="tracking-id-title">ID de Pedido</div>
+                        <div class="tracking-id" id="order-number">MOR12345</div>
+                    </div>
+                    
+                    <div class="tracking-details">
+                        <p><strong>Último estado:</strong> <span id="order-status">En tránsito</span></p>
+                        <p><strong>Fecha estimada de entrega:</strong> <span id="delivery-date">25 de Abril, 2025</span></p>
+                        <p><strong>Ubicación actual:</strong> <span id="current-location">Sucursal de Panamá Centro</span></p>
+                        <p><strong>ID de seguimiento:</strong> <span id="tracking-id">MORPH-TR-789654</span></p>
+                    </div>
+                    
+                    <div class="tracking-steps">
+                        <div class="step active">
+                            <div class="step-icon">1</div>
+                            <div class="step-label">Pedido confirmado</div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-icon">2</div>
+                            <div class="step-label">En preparación</div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-icon">3</div>
+                            <div class="step-label">En tránsito</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">4</div>
+                            <div class="step-label">En sucursal</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">5</div>
+                            <div class="step-label">Entregado</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pagos" class="container">
+            <h2>Métodos de Pago</h2>
+            <p>Ofrecemos múltiples opciones de pago seguro para tu comodidad:</p>
+            
+            <div class="payment-methods">
+                <div class="payment-method" onclick="selectPayment('visa')">
+                    <div class="payment-icon">💳</div>
+                    <h3>Visa</h3>
+                    <div class="payment-type">Débito o Crédito</div>
+                </div>
+                
+                <div class="payment-method" onclick="selectPayment('mastercard')">
+                    <div class="payment-icon">💳</div>
+                    <h3>Mastercard</h3>
+                    <div class="payment-type">Débito o Crédito</div>
+                </div>
+                
+                <div class="payment-method" onclick="selectPayment('yappy')">
+                    <div class="payment-icon">📱</div>
+                    <h3>Yappy</h3>
+                    <div class="payment-type">Pago Móvil</div>
+                </div>
+            </div>
+            
+            <!-- Formulario de Visa/Mastercard -->
+            <div class="payment-form" id="card-form">
+                <h3>Pago con Tarjeta</h3>
+                
+                <div class="payment-info">
+                    <p><strong>Información de seguridad:</strong> Todos los pagos son procesados con protocolo SSL de 256-bit.</p>
+                    <p>Se te solicitará un código de verificación 3D Secure para completar la transacción.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-type">Tipo de Tarjeta</label>
+                    <select id="card-type">
+                        <option value="credito">Tarjeta de Crédito</option>
+                        <option value="debito">Tarjeta de Débito</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-number">Número de Tarjeta</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Fecha de Expiración</label>
+                        <input type="text" id="expiry" placeholder="MM/AA">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-name">Nombre en la Tarjeta</label>
+                    <input type="text" id="card-name" placeholder="Nombre como aparece en la tarjeta">
+                </div>
+                
+                <div class="payment-security">
+                    <span>🔒</span> Tus datos están protegidos con encriptación de nivel bancario
+                </div>
+                
+                <button class="btn">Procesar Pago</button>
+            </div>
+            
+            <!-- Formulario de Yappy -->
+            <div class="payment-form" id="yappy-form" style="display: none;">
+                <h3>Pago con Yappy</h3>
+                
+                <div class="payment-info">
+                    <p><strong>Pago rápido y seguro</strong> a través de la aplicación de Banco General.</p>
+                    <p>Realiza tu pago al siguiente número:</p>
+                </div>
+                
+                <div class="phone-info">
+                    63617017
+                </div>
+                
+                <div class="form-group">
+                    <label for="receipt-upload">Subir Comprobante de Pago</label>
+                    <div class="file-upload" onclick="document.getElementById('receipt-file').click()">
+                        <div class="file-upload-icon">📤</div>
+                        <p>Sube el comprobante emitido por el Banco</p>
+                        <p>Haz clic aquí o arrastra el archivo</p>
+                        <input type="file" id="receipt-file" style="display: none;" accept="image/*">
+                    </div>
+                    <div id="file-name" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                </div>
+                
+                <div class="payment-security">
+                    <span>📱</span> Por favor asegúrate que el comprobante muestra claramente la referencia de pago
+                </div>
+                
+                <button class="btn">Confirmar Pago</button>
+            </div>
+        </section>
+        
+        <section id="contacto" class="container">
+            <h2>Contacto</h2>
+            <p>¿Tienes alguna pregunta? Estamos aquí para ayudarte.</p>
+            
+            <div class="tracking-container">
+                <div class="form-group">
+                    <label for="contact-name">Nombre</label>
+                    <input type="text" id="contact-name" placeholder="Tu nombre">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-email">Correo Electrónico</label>
+                    <input type="email" id="contact-email" placeholder="tu@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-message">Mensaje</label>
+                    <textarea id="contact-message" rows="5" placeholder="¿En qué podemos ayudarte?"></textarea>
+                </div>
+                
+                <button class="btn">Enviar Mensaje</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="logo">MORPHOSIS</div>
+        <div class="footer-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#seguimiento">Seguimiento</a>
+            <a href="#pagos">Pagos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <p>&copy; 2025 MORPHOSIS. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        function checkTracking() {
+            // En un sitio real, aquí se consultaría la API de seguimiento
+            const trackingNumber = document.getElementById('tracking-number').value;
+            
+            // Mostrar resultados de ejemplo
+            if (trackingNumber) {
+                document.getElementById('tracking-result').className = 'tracking-result active';
+                document.getElementById('order-number').textContent = trackingNumber;
+                document.getElementById('tracking-id').textContent = 'MORPH-TR-' + Math.floor(100000 + Math.random() * 900000);
+                
+                // Aquí se actualizaría el estado según la respuesta del servidor
+                // Este es solo un ejemplo
+            }
+        }
+        
+        function selectPayment(method) {
+            // Ocultar todos los formularios primero
+            document.getElementById('card-form').style.display = 'none';
+            document.getElementById('yappy-form').style.display = 'none';
+            
+            // Mostrar el formulario seleccionado
+            if (method === 'visa' || method === 'mastercard') {
+                document.getElementById('card-form').style.display = 'block';
+            } else if (method === 'yappy') {
+                document.getElementById('yappy-form').style.display = 'block';
+            }
+            
+            // Actualizar clase activa para los métodos de pago
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(pm => {
+                pm.classList.remove('active');
+            });
+            
+            // Encuentra el método seleccionado y añade la clase activa
+            document.querySelector(`.payment-method[onclick="selectPayment('${method}')"]`).classList.add('active');
+        }
+        
+        // Mostrar el nombre del archivo seleccionado
+        document.getElementById('receipt-file')?.addEventListener('change', function() {
+            const fileName = this.files[0]?.name;
+            if (fileName) {
+                document.getElementById('file-name').textContent = 'Archivo seleccionado: ' + fileName;
+            }
+        });
+    </script>
+</body>
+</html>
